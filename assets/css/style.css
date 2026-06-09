@@ -1,0 +1,71 @@
+/* Card polish */
+
+.body{ 
+     background-color: rgba(42, 40, 40, 0.962)!important;
+}
+.card {
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  overflow: hidden;
+  flex:1; 
+  height: 100%;
+}
+
+/* Form spacing */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  font-weight: 600;
+}
+
+/* Buttons */
+.btn {
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+/* Footer buttons side by side */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.spinner{ 
+       top: 0;
+       left: 0;
+       position: fixed;
+       background-color: rgba(255, 255, 255, 0.37);
+       height: 100%;
+       width: 100%;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .col-md-6.offset-md-3 {
+    margin: 0 !important; /* remove offset on small screens */
+    max-width: 100%;
+  }
+
+  .col-md-4 {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .card-footer {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
