@@ -205,7 +205,7 @@ function onEdit(ele){
                    spinner.classList.add('d-none');
                 }else{ 
                    spinner.classList.add('d-none');
-                   snackbar('failed to edit ')
+                   snackbar('failed to edit', 'error')
                 }
             }
 }
