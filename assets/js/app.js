@@ -58,7 +58,8 @@ function createCard(arr){
 }
 
 
-function fetchPost(){ 
+function fetchPost(){  
+     spinner.classList.remove('d-none');
        let xhr= new XMLHttpRequest() ; //instance is created
 
         xhr.open('GET',post_url,true); 
@@ -68,9 +69,11 @@ function fetchPost(){
            if(xhr.status>=200 && xhr.status<=299){ 
                 let postArr = JSON.parse(xhr.response);
                 
-                  createCard(postArr);
-
+                createCard(postArr);
+                spinner.classList.add('d-none');
+                
            }  else{ 
+                spinner.classList.add('d-none');
                 snackbar('API cal failed...!', 'error')     
            }   
         }
@@ -94,7 +97,8 @@ function onSubmit(eve){
     }  
 
 
-
+     spinner.classList.remove('d-none');
+    
     let xhr= new XMLHttpRequest() ;
         xhr.open("POST", post_url); 
         xhr.send(JSON.stringify(postObj)); 
@@ -124,10 +128,13 @@ function onSubmit(eve){
                                     </div>
                                     </div>`
 
-             postContainer.prepend(div);
-                   
+               postContainer.prepend(div);
+               spinner.classList.add('d-none');
+               snackbar('Post submitted successfully','success');
+                    
              }else{ 
-                  snackbar('Submit is failed','error');
+                spinner.classList.add('d-none');
+                snackbar('Submit is failed','error');
              }
         }
 
@@ -149,7 +156,7 @@ function onRemove(ele){
         confirmButtonText: "Yes, delete it!"
         }).then((result) => {
         if (result.isConfirmed) { 
-             
+             spinner.classList.remove('d-none');
             let xhr= new XMLHttpRequest() ;
                 xhr.open('DELETE', removeUrl);
                 xhr.send(null); 
@@ -157,8 +164,11 @@ function onRemove(ele){
                 if(xhr.status>=200 && xhr.status<=299){ 
                     let res =JSON.parse(xhr.response); 
                     ele.closest('.col-md-6').remove();
+                    spinner.classList.add('d-none');
                            
                 }else{ 
+                    spinner.classList.add('d-none');
+                   
                      snackbar('Not able to delete Data', 'error')
                 }
               }
@@ -175,7 +185,8 @@ function onEdit(ele){
          localStorage.setItem('EditId', editId); 
 
        let Edit_url = `${base_url}/posts/${editId}`;
-  
+          spinner.classList.remove('d-none');
+             
         let xhr = new XMLHttpRequest() ;
             xhr.open('GET', Edit_url); 
             xhr.send(JSON.stringify(Edit_url));
@@ -191,7 +202,10 @@ function onEdit(ele){
                    addPost.classList.add('d-none'); 
                    updatePost.classList.remove('d-none'); 
                    
-               
+                   spinner.classList.add('d-none');
+                }else{ 
+                   spinner.classList.add('d-none');
+                   snackbar('failed to edit ')
                 }
             }
 }
@@ -205,6 +219,8 @@ function onUpdate(){
                 body:bodyControl.value ,
                 userId:userIdControl.value
        }
+
+       spinner.classList.remove('d-none');
     let xhr= new XMLHttpRequest() ; 
         xhr.open('PATCH', updateUrl);
     
@@ -220,8 +236,14 @@ function onUpdate(){
                      
                    addPost.classList.remove('d-none'); 
                    updatePost.classList.add('d-none');
+                       postForm.reset();
 
+                  spinner.classList.add('d-none');
+                 snackbar('post  updated successfully', 'success');
+                 
             } else{
+                  spinner.classList.add('d-none');
+                 
                  snackbar('Data is not updated', 'error');
             }       
        }
