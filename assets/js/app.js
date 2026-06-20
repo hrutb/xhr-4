@@ -202,8 +202,9 @@ function onEdit(ele){
                    addPost.classList.add('d-none'); 
                    updatePost.classList.remove('d-none'); 
                    
+                   window.scrollTo({top:0,behavior:'smooth'});
                    spinner.classList.add('d-none');
-                }else{ 
+                  }else{ 
                    spinner.classList.add('d-none');
                    snackbar('failed to edit', 'error')
                 }
@@ -237,7 +238,8 @@ function onUpdate(){
                    addPost.classList.remove('d-none'); 
                    updatePost.classList.add('d-none');
                        postForm.reset();
-
+                   col.scrollIntoView({block:'center',behavior:'smooth'});
+                    
                   spinner.classList.add('d-none');
                  snackbar('post  updated successfully', 'success');
                  
